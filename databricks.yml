@@ -1,0 +1,32 @@
+bundle:
+  name: bike_lakehouse
+
+variables:
+  catalog:
+    default: dev_project
+    description: Unity Catalog catalog name
+  environment:
+    default: dev
+    description: Deployment environment
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-fffbd12a-7e7c.cloud.databricks.com
+    variables:
+      catalog:      dev_project
+      environment:  dev
+
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-fffbd12a-7e7c.cloud.databricks.com
+    variables:
+      catalog:      dev_project
+      environment:  prod
+
+include:
+  - resources/jobs/bike_lakehouse_job.yml
+  
